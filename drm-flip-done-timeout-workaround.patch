@@ -1,0 +1,54 @@
+diff --git a/drivers/gpu/drm/drm_atomic_helper.c b/drivers/gpu/drm/drm_atomic_helper.c
+index 130da5195f3..caf95fba41f 100644
+--- a/drivers/gpu/drm/drm_atomic_helper.c
++++ b/drivers/gpu/drm/drm_atomic_helper.c
+@@ -1890,6 +1890,8 @@ int drm_atomic_helper_setup_commit(struct drm_atomic_state *state,
+ 			continue;
+ 		}
+ 
++		complete_all(&commit->flip_done);
++
+ 		if (!new_crtc_state->event) {
+ 			commit->event = kzalloc(sizeof(*commit->event),
+ 						GFP_KERNEL);
+diff --git a/drivers/gpu/drm/imx/imx-drm-core.c b/drivers/gpu/drm/imx/imx-drm-core.c
+index 1d053bbefc0..5f3bec94c3a 100644
+--- a/drivers/gpu/drm/imx/imx-drm-core.c
++++ b/drivers/gpu/drm/imx/imx-drm-core.c
+@@ -156,6 +156,8 @@ int imx_drm_encoder_parse_of(struct drm_device *drm,
+ 		return -EPROBE_DEFER;
+ 
+ 	encoder->possible_crtcs = crtc_mask;
++	/* Hack: Only allow these devices to use IPU1 */
++	encoder->possible_crtcs &= 0x03;
+ 
+ 	/* FIXME: this is the mask of outputs which can clone this output. */
+ 	encoder->possible_clones = ~0;
+diff --git a/drivers/gpu/ipu-v3/ipu-di.c b/drivers/gpu/ipu-v3/ipu-di.c
+index d2f1bd9d3de..461d2115e75 100644
+--- a/drivers/gpu/ipu-v3/ipu-di.c
++++ b/drivers/gpu/ipu-v3/ipu-di.c
+@@ -12,6 +12,7 @@
+  * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+  * for more details.
+  */
++#include <linux/delay.h>
+ #include <linux/export.h>
+ #include <linux/module.h>
+ #include <linux/types.h>
+@@ -435,6 +436,7 @@ static void ipu_di_config_clock(struct ipu_di *di,
+ 			unsigned div;
+ 
+ 			clk_set_rate(clk, sig->mode.pixelclock);
++      msleep(15);
+ 
+ 			in_rate = clk_get_rate(clk);
+ 			div = DIV_ROUND_CLOSEST(in_rate, sig->mode.pixelclock);
+@@ -475,6 +477,7 @@ static void ipu_di_config_clock(struct ipu_di *di,
+ 			clk = di->clk_di;
+ 
+ 			clk_set_rate(clk, sig->mode.pixelclock);
++      msleep(15);
+ 
+ 			in_rate = clk_get_rate(clk);
+ 			div = DIV_ROUND_CLOSEST(in_rate, sig->mode.pixelclock);
