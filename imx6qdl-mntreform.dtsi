@@ -61,7 +61,7 @@
 			regulator-name = "usb_otg_vbus";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
-			gpio = <&gpio4 15 GPIO_ACTIVE_HIGH>;
+			regulator-always-on;
 			enable-active-high;
 		};
 
@@ -71,7 +71,7 @@
 			regulator-name = "usb_h1_vbus";
 			regulator-min-microvolt = <5000000>;
 			regulator-max-microvolt = <5000000>;
-			gpio = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+			regulator-always-on;
 			enable-active-high;
 		};
 
@@ -295,7 +295,7 @@ See: https://community.nxp.com/thread/306801
 
 		pinctrl_pcie: pciegrp {
 			fsl,pins = <
-			MX6QDL_PAD_GPIO_17__GPIO7_IO12				0x80000000 /* Wake */
+			MX6QDL_PAD_GPIO_17__GPIO7_IO12	 	0x80000000 /* Wake */
 			MX6QDL_PAD_EIM_A25__GPIO5_IO02		0x80000000 /* Reset */
 			>;
 		};
@@ -351,7 +351,6 @@ See: https://community.nxp.com/thread/306801
 			>;
 		};
 
-		/* TinyRex */
 		pinctrl_usdhc3: usdhc3grp {
 			fsl,pins = <
 			MX6QDL_PAD_SD3_CMD__SD3_CMD		0x00017059
@@ -424,14 +423,14 @@ See: https://community.nxp.com/thread/306801
 };
 
 &usbotg {
-	/*vbus-supply = <&reg_usb_otg_vbus>;
+	vbus-supply = <&reg_usb_otg_vbus>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usbotg>;
 	disable-over-current;
 	srp-disable;
 	hnp-disable;
-	adp-disable;*/
-	status = "disabled";
+	adp-disable;
+	status = "okay";
 };
 
 &usbphy1 {
