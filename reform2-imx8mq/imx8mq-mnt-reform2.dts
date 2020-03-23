@@ -14,27 +14,27 @@
 / {
 	model = "MNT Reform 2";
 	compatible = "boundary,imx8mq-nitrogen8m_som", "fsl,imx8mq";
-  
+	
 	memory@40000000 {
 		device_type = "memory";
 		reg = <0x00000000 0x40000000 0 0xc0000000>;
 	};
-  
-  /* D-3 audio */
-  sound {
-	  compatible = "simple-audio-card";
-	  simple-audio-card,name = "wm8960-audio";
-	  simple-audio-card,format = "i2s";
-	  simple-audio-card,frame-master = <&dai_cpu_master>;
-	  simple-audio-card,bitclock-master = <&dai_cpu_master>;
+	
+	/* D-3 audio */
+	sound {
+		compatible = "simple-audio-card";
+		simple-audio-card,name = "wm8960-audio";
+		simple-audio-card,format = "i2s";
+		simple-audio-card,frame-master = <&dai_cpu_master>;
+		simple-audio-card,bitclock-master = <&dai_cpu_master>;
 
 		simple-audio-card,widgets =
-		  "Microphone", "Mic Jack",
+			"Microphone", "Mic Jack",
 			"Line", "Line In",
 			"Line", "Line Out",
 			"Speaker", "Speaker",
-		  "Headphone", "Headphone Jack";
-	  simple-audio-card,routing =
+			"Headphone", "Headphone Jack";
+		simple-audio-card,routing =
 			"Headphone Jack", "HP_L",
 			"Headphone Jack", "HP_R",
 			"Speaker", "SPK_LP",
@@ -46,24 +46,24 @@
 			"RINPUT1", "Mic Jack",
 			"RINPUT2", "Mic Jack";
 
-	  dai_cpu_master: simple-audio-card,cpu {
-		  sound-dai = <&sai2>;
-	  };
+		dai_cpu_master: simple-audio-card,cpu {
+			sound-dai = <&sai2>;
+		};
 
-	  dailink0: simple-audio-card,codec {
-		  sound-dai = <&codec>;
-	  };
-  };
+		dailink0: simple-audio-card,codec {
+			sound-dai = <&codec>;
+		};
+	};
 
-  /* D-2 audio */
-  /*sound {
-	  compatible = "simple-audio-card";
-	  simple-audio-card,name = "wm8731-audio";
-	  simple-audio-card,format = "i2s";
-	  simple-audio-card,frame-master = <&dai_cpu_master>;
-	  simple-audio-card,bitclock-master = <&dai_cpu_master>;
-    
-    simple-audio-card,widgets =
+	/* D-2 audio */
+	/*sound {
+		compatible = "simple-audio-card";
+		simple-audio-card,name = "wm8731-audio";
+		simple-audio-card,format = "i2s";
+		simple-audio-card,frame-master = <&dai_cpu_master>;
+		simple-audio-card,bitclock-master = <&dai_cpu_master>;
+		
+		simple-audio-card,widgets =
 			"Headphone", "Headphone Jack",
 			"Line", "Line Out",
 			"Microphone", "Mic Jack",
@@ -74,30 +74,30 @@
 			"MICIN", "Mic Bias",
 			"Mic Bias", "Mic Jack";
 
-	  dai_cpu_master: simple-audio-card,cpu {
-		  sound-dai = <&sai2>;
-	  };
+		dai_cpu_master: simple-audio-card,cpu {
+			sound-dai = <&sai2>;
+		};
 
-	  dailink0: simple-audio-card,codec {
-		  sound-dai = <&codec>;
-	  };
-  };*/
-  
+		dailink0: simple-audio-card,codec {
+			sound-dai = <&codec>;
+		};
+	};*/
+	
 	backlight: backlight {
 		compatible = "pwm-backlight";
 		pwms = <&pwm2 0 10000>;
-    enable-gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
+		enable-gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
 		brightness-levels = <0 32 64 128 160 200 255>;
 		default-brightness-level = <6>;
-    status = "okay";
+		status = "okay";
 	};
 
-  panel: panel {
-    compatible = "lg,lp120up1", "simple-panel";
+	panel: panel {
+		compatible = "lg,lp120up1", "simple-panel";
 		//backlight = <&backlight>;
-    status = "okay";
-    no-hpd;
-	  power = <&reg_vref_3v3>;
+		status = "okay";
+		no-hpd;
+		power = <&reg_vref_3v3>;
 
 		port@0 {
 			panel_in: endpoint {
@@ -105,13 +105,13 @@
 			};
 		};
 	};
-  
+	
 	reg_vref_0v9: regulator-vref-0v9 {
 		compatible = "regulator-fixed";
 		regulator-name = "vref-0v9";
 		regulator-min-microvolt = <900000>;
 		regulator-max-microvolt = <900000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
 
 	reg_vref_1v2: regulator-vref-1v2 {
@@ -119,15 +119,15 @@
 		regulator-name = "vref-1v2";
 		regulator-min-microvolt = <1200000>;
 		regulator-max-microvolt = <1200000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
-  
+	
 	reg_vref_1v8: regulator-vref-1v8 {
 		compatible = "regulator-fixed";
 		regulator-name = "vref-1v8";
 		regulator-min-microvolt = <1800000>;
 		regulator-max-microvolt = <1800000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
 
 	reg_vref_2v5: regulator-vref-2v5 {
@@ -135,7 +135,7 @@
 		regulator-name = "vref-2v5";
 		regulator-min-microvolt = <2500000>;
 		regulator-max-microvolt = <2500000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
 
 	reg_vref_3v3: regulator-vref-3v3 {
@@ -143,7 +143,7 @@
 		regulator-name = "vref-3v3";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
 
 	reg_vref_5v: regulator-vref-5v {
@@ -151,7 +151,7 @@
 		regulator-name = "vref-5v";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
 
 	reg_usdhc2_vmmc: regulator-vsd-3v3 {
@@ -160,9 +160,9 @@
 		regulator-name = "3V3_SD";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-    regulator-always-on;
+		regulator-always-on;
 	};
-  
+	
 	pcie0_refclk: pcie0-refclk {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
@@ -180,13 +180,13 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
 
-  pinctrl_hog: hoggrp {
-	  fsl,pins = <
-    //MX8MQ_IOMUXC_GPIO1_IO10_GPIO1_IO10		0x19	/* Pin 105 */
-	  MX8MQ_IOMUXC_SAI5_RXC_GPIO3_IO20		0x19 // FIXME what's this?
+	pinctrl_hog: hoggrp {
+		fsl,pins = <
+		//MX8MQ_IOMUXC_GPIO1_IO10_GPIO1_IO10		0x19	/* Pin 105 */
+		MX8MQ_IOMUXC_SAI5_RXC_GPIO3_IO20		0x19 // FIXME what's this?
 		MX8MQ_IOMUXC_GPIO1_IO14_GPIO1_IO14		0x56 // pullup usb hub reset (0x40)
-    >;
-  };
+		>;
+	};
 
 	pinctrl_fec1: fec1grp {
 		fsl,pins = <
@@ -217,7 +217,7 @@
 			MX8MQ_IOMUXC_I2C1_SDA_I2C1_SDA			0x4000007f
 		>;
 	};
-  
+	
 	pinctrl_i2c1_pca9546: i2c1-pca9546grp {
 		fsl,pins = <
 #define GP_I2C1_PCA9546_RESET	<&gpio1 4 GPIO_ACTIVE_LOW>
@@ -246,14 +246,14 @@
 		>;
 	};
 
-  pinctrl_pcie0: pcie0grp {
+	pinctrl_pcie0: pcie0grp {
 		fsl,pins = <
 #define GP_PCIE0_RESET		<&gpio5 7 GPIO_ACTIVE_LOW>
 			MX8MQ_IOMUXC_ECSPI1_MOSI_GPIO5_IO7		0x16
 		>;
 	};
-  
-  pinctrl_pcie1: pcie1grp {
+	
+	pinctrl_pcie1: pcie1grp {
 		fsl,pins = <
 			MX8MQ_IOMUXC_SAI5_RXD2_GPIO3_IO23		0x16
 		>;
@@ -471,9 +471,9 @@
 	phy-mode = "rgmii-id";
 	phy-handle = <&ethphy0>;
 	//phy-reset-gpios = GP_FEC1_RESET;
-  //phy-reset-duration = <10>;
+	//phy-reset-duration = <10>;
 	fsl,magic-packet;
-  status = "okay";
+	status = "okay";
 
 	mdio {
 		#address-cells = <1>;
@@ -495,9 +495,9 @@
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
 
-  // FIXME?
-  // clsom
-  pca9555:pca9555@20 {
+	// FIXME?
+	// clsom
+	pca9555:pca9555@20 {
 		compatible = "nxp,pca9555";
 		/* Role #0 */
 		gpio-controller;
@@ -552,7 +552,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_reg_arm_dram>;
 		reg = <0x60>;
-		regulator-min-microvolt =  <900000>;
+		regulator-min-microvolt =	 <900000>;
 		regulator-max-microvolt = <1000000>;
 		regulator-always-on;
 		vsel-gpios = GP_ARM_DRAM_VSEL;
@@ -578,7 +578,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_reg_soc_gpu_vpu>;
 		reg = <0x60>;
-		regulator-min-microvolt =  <900000>;
+		regulator-min-microvolt =	 <900000>;
 		regulator-max-microvolt = <1000000>;
 		regulator-always-on;
 		vsel-gpios = GP_SOC_GPU_VPU_VSEL;
@@ -590,13 +590,13 @@
 	pinctrl-0 = <&pinctrl_pcie0>;
 	reset-gpio = GP_PCIE0_RESET;
 
-  clocks = <&clk IMX8MQ_CLK_PCIE1_ROOT>,
-	  <&clk IMX8MQ_CLK_PCIE1_AUX>,
-	  <&clk IMX8MQ_CLK_PCIE1_PHY>,
-	  <&pcie0_refclk>;
-  
+	clocks = <&clk IMX8MQ_CLK_PCIE1_ROOT>,
+		<&clk IMX8MQ_CLK_PCIE1_AUX>,
+		<&clk IMX8MQ_CLK_PCIE1_PHY>,
+		<&pcie0_refclk>;
+	
 	clock-names = "pcie", "pcie_aux", "pcie_phy", "pcie_bus";
-  
+	
 	ext_osc = <0>;
 	status = "okay";
 };
@@ -606,13 +606,13 @@
 	pinctrl-0 = <&pinctrl_pcie1>;
 	reset-gpio = <&gpio3 23 GPIO_ACTIVE_LOW>;
 
-  clocks = <&clk IMX8MQ_CLK_PCIE2_ROOT>,
-	         <&clk IMX8MQ_CLK_PCIE2_AUX>,
-	         <&clk IMX8MQ_CLK_PCIE2_PHY>,
-	         <&pcie1_refclk>;
-  
+	clocks = <&clk IMX8MQ_CLK_PCIE2_ROOT>,
+					 <&clk IMX8MQ_CLK_PCIE2_AUX>,
+					 <&clk IMX8MQ_CLK_PCIE2_PHY>,
+					 <&pcie1_refclk>;
+	
 	clock-names = "pcie", "pcie_aux", "pcie_phy", "pcie_bus";
-  
+	
 	ext_osc = <1>;
 	status = "okay";
 };
@@ -638,11 +638,11 @@
 &sai2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_sai2>;
-  status = "okay";
-  
-  assigned-clocks = <&clk IMX8MQ_CLK_SAI2>;
-  assigned-clock-parents = <&clk IMX8MQ_AUDIO_PLL2_OUT>;
-  assigned-clock-rates = <12288000>;
+	status = "okay";
+	
+	assigned-clocks = <&clk IMX8MQ_CLK_SAI2>;
+	assigned-clock-parents = <&clk IMX8MQ_AUDIO_PLL2_OUT>;
+	assigned-clock-rates = <12288000>;
 };
 
 &uart1 { /* console */
@@ -719,42 +719,42 @@
 	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
 	status = "okay";
 	vmmc-supply = <&reg_vref_3v3>;
-  //no-1-8-v; // this makes microSD cards stop working
+	//no-1-8-v; // this makes microSD cards stop working
 };*/
 
 &usdhc2 {
 	bus-width = <4>;
-  // doesn't seem to make any difference
+	// doesn't seem to make any difference
 	//fsl,tuning-start-tap = <32>;
-  
-  // 1 can make tuning fail, 2 works on some cards, 3 same, 5 same
+	
+	// 1 can make tuning fail, 2 works on some cards, 3 same, 5 same
 	//fsl,tuning-step = <2>;
-  
-  // 1 = no difference, 16 = no difference, 128 = no difference
-  //fsl,delay-line = <0>;
+	
+	// 1 = no difference, 16 = no difference, 128 = no difference
+	//fsl,delay-line = <0>;
 
-  // this makes microSD cards stop working
-  no-1-8-v;
+	// this makes microSD cards stop working
+	no-1-8-v;
 
-  // changing these around breaks tuning
-  pinctrl-names = "default", "state_100mhz", "state_200mhz";
+	// changing these around breaks tuning
+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	pinctrl-1 = <&pinctrl_usdhc2_100mhz>;
 	pinctrl-2 = <&pinctrl_usdhc2_200mhz>;
 	status = "okay";
 	vmmc-supply = <&reg_vref_3v3>;
-  //no-sd-uhs-sdr104;
+	//no-sd-uhs-sdr104;
 
 	//assigned-clocks = <&clk IMX8MQ_CLK_USDHC2>;
 	//assigned-clock-rates = <200000000>;
 };
 
 /*&hdmi {
-  status = "okay";
+	status = "okay";
 };*/
 
 &dcss {
-  status = "okay";
+	status = "okay";
 
 	clocks = <&clk IMX8MQ_CLK_DISP_APB_ROOT>,
 	<&clk IMX8MQ_CLK_DISP_AXI_ROOT>,
@@ -763,15 +763,15 @@
 	<&clk IMX8MQ_CLK_DISP_DTRC>;
 	clock-names = "apb", "axi", "rtrm", "pix", "dtrc";
 
-  assigned-clocks =
-  <&clk IMX8MQ_CLK_DC_PIXEL>,
+	assigned-clocks =
+	<&clk IMX8MQ_CLK_DC_PIXEL>,
 	<&clk IMX8MQ_VIDEO_PLL1_BYPASS>,
 	<&clk IMX8MQ_VIDEO_PLL1_REF_SEL>,
 	<&clk IMX8MQ_CLK_DISP_AXI>,
 	<&clk IMX8MQ_CLK_DISP_RTRM>;
 
-  assigned-clock-parents =
-  <&clk IMX8MQ_VIDEO_PLL1_OUT>,
+	assigned-clock-parents =
+	<&clk IMX8MQ_VIDEO_PLL1_OUT>,
 	<&clk IMX8MQ_VIDEO_PLL1>,
 	<&clk IMX8MQ_CLK_25M>,
 	<&clk IMX8MQ_SYS1_PLL_800M>,
@@ -780,18 +780,18 @@
 	<800000000>,
 	<400000000>;
 
-  port@0 {
-    dcss_out: endpoint {
-      remote-endpoint = <&mipi_dsi_in>;
-    };
-  };
+	port@0 {
+		dcss_out: endpoint {
+			remote-endpoint = <&mipi_dsi_in>;
+		};
+	};
 };
 
 
 &lcdif {
 	status = "okay";
 	max-res = <1920>, <1080>;
-  
+	
 	/*port@0 {
 		lcdif_mipi_dsi: endpoint {
 			remote-endpoint = <&mipi_dsi_in>;
@@ -805,7 +805,7 @@
 
 &mipi_dsi {
 	status = "okay";
-  
+	
 	ports {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -813,15 +813,15 @@
 		port@0 {
 			reg = <0>;
 			mipi_dsi_in: endpoint {
-        //remote-endpoint = <&lcdif_mipi_dsi>;
-        remote-endpoint = <&dcss_out>;
+				//remote-endpoint = <&lcdif_mipi_dsi>;
+				remote-endpoint = <&dcss_out>;
 			};
 		};
 		port@1 {
 			reg = <1>;
-		  dsi_out: endpoint {
-			  remote-endpoint = <&edp_bridge_in>;
-		  };
+			dsi_out: endpoint {
+				remote-endpoint = <&edp_bridge_in>;
+			};
 		};
 	};
 };
@@ -831,33 +831,33 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
 	status = "okay";
-  
-  /* D-3 AUDIO */
+	
+	/* D-3 AUDIO */
 	codec: wm8960@1a {
 		compatible = "wlf,wm8960";
 		reg = <0x1a>;
 		clocks = <&clk IMX8MQ_CLK_SAI2>;
 		clock-names = "mclk";
-	  #sound-dai-cells = <0>;
-    
-    AVDD-supply = <&reg_vref_3v3>;
-    HPVDD-supply = <&reg_vref_3v3>;
-    DCVDD-supply = <&reg_vref_3v3>;
-    DBVDD-supply = <&reg_vref_3v3>;
+		#sound-dai-cells = <0>;
+		
+		AVDD-supply = <&reg_vref_3v3>;
+		HPVDD-supply = <&reg_vref_3v3>;
+		DCVDD-supply = <&reg_vref_3v3>;
+		DBVDD-supply = <&reg_vref_3v3>;
 	};
 
-  /* D-2 AUDIO */
+	/* D-2 AUDIO */
 	/*codec: wm8731@1a {
 		compatible = "wlf,wm8731";
 		reg = <0x1a>;
 		clocks = <&clk IMX8MQ_CLK_SAI2>;
 		clock-names = "mclk";
-	  #sound-dai-cells = <0>;
-    
-    AVDD-supply = <&reg_vref_3v3>;
-    HPVDD-supply = <&reg_vref_3v3>;
-    DCVDD-supply = <&reg_vref_3v3>;
-    DBVDD-supply = <&reg_vref_3v3>;
+		#sound-dai-cells = <0>;
+		
+		AVDD-supply = <&reg_vref_3v3>;
+		HPVDD-supply = <&reg_vref_3v3>;
+		DCVDD-supply = <&reg_vref_3v3>;
+		DBVDD-supply = <&reg_vref_3v3>;
 	};*/
 
 	pcf8523: pcf8523@68 {
@@ -871,20 +871,20 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c4>;
 	status = "okay";
-  
+	
 	edp_bridge: sn65dsi86@2c {
 		compatible = "ti,sn65dsi86";
 		reg = <0x2c>;
-	  status = "okay";
-    enable-gpios = <&gpio3 20 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+		enable-gpios = <&gpio3 20 GPIO_ACTIVE_HIGH>;
 
-    /*vcca-supply = <&reg_vref_1v2>;
-    vcc-supply = <&reg_vref_1v2>;
-    vccio-supply = <&reg_vref_1v8>;
-    vpll-supply = <&reg_vref_1v8>;*/
-    
-	  //clock-names = "refclk";
-	  //clocks = <&input_refclk>;
+		/*vcca-supply = <&reg_vref_1v2>;
+		vcc-supply = <&reg_vref_1v2>;
+		vccio-supply = <&reg_vref_1v8>;
+		vpll-supply = <&reg_vref_1v8>;*/
+		
+		//clock-names = "refclk";
+		//clocks = <&input_refclk>;
 
 		ports {
 			#address-cells = <1>;
@@ -902,8 +902,8 @@
 				reg = <1>;
 
 				edp_bridge_out: endpoint {
-				  //data-lanes = <2 1 3 0>;
-				  //lane-polarities = <0 1 0 1>;
+					//data-lanes = <2 1 3 0>;
+					//lane-polarities = <0 1 0 1>;
 					remote-endpoint = <&panel_in>;
 				};
 			};
